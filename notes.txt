@@ -1,0 +1,9 @@
+-->For file uploading
+1.We can't upload file using POST operation directly using ODATA V4, only PUT is allowed to file upload
+2.But we can upload the file using POST operation using ODATA V2
+
+-->How to upload the file using V4 :
+1.First create an dummy entry(with key value) in db table
+2.Now using the key value update the record with file using PUT operation
+3.File will be uploaded into the table
+

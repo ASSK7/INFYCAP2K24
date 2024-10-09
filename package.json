@@ -1,0 +1,60 @@
+{
+  "name": "APIHUBCAP",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/http-client": "^3.20.0",
+    "@sap-cloud-sdk/resilience": "^3.20.0",
+    "@sap/cds": "^8",
+    "@sap/hana-client": "^2.22.27",
+    "@sap/hdi-deploy": "^5.3.2",
+    "express": "^4",
+    "passport": "^0.7.0"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.6",
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^8",
+    "@sap/ux-specification": "UI5-1.128",
+    "rimraf": "^5.0.5"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-project1": "cds watch --open project1/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy APIHUBCAP --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "hana"
+      },
+      "uaa": {
+        "kind": "+"
+      },
+      "schema_evolution": "auto",
+      "CE_DIRECTACTIVITYALLOCATION_0001": {
+        "kind": "odata-v4",
+        "model": "srv/external/CE_DIRECTACTIVITYALLOCATION_0001",
+        "credentials": {
+          "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_drctactivityallocation/srvd_a2x/sap/directactivityallocation/0001",
+          "headers": {
+            "APIKey": "GCfOFOS4bslFac4VBp4byLNc9fjyFYg6"
+          }
+        }
+      }
+    },
+    "auth": {
+      "passport": {
+        "strategy": "JWT"
+      }
+    }
+  },
+  "sapux": [
+    "app/project1"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "xsappname": "apihubcap",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [{
+    "name": "uaa.user",
+    "description": "UAA"
+  }],
+  "role-templates": [{
+    "name": "Token_Exchange",
+    "description": "UAA",
+    "scope-references": [
+      "uaa.user"
+    ]
+  }],
+  "oauth2-configuration": {
+    "token-validity": 43200, 
+    "redirect-uris": [
+      "https://myapp.cfapps.eu10-004.hana.ondemand.com",
+      "https://*27b52a45trial-dev-apihubcap-approuter.cfapps.us10-001.hana.ondemand.com*",
+         "https://*27b52a45trial.authentication.us10.hana.ondemand.com*",
+        "https://27b52a45trial.authentication.us10.hana.ondemand.com/oauth/authorize?response_type=code&client_id=sb-apihubcap!t340698&redirect_uri=https://27b52a45trial-dev-apihubcap-approuter.cfapps.us10-001.hana.ondemand.com/login/callback",
+        "https://*.cfapps.us10-001.hana.ondemand.com/login/callback*"],
+    "refresh-token-validity": 1800
+    }
+}

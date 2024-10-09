@@ -1,0 +1,12 @@
+{
+  "authenticationMethod": "none",
+  "routes": [
+    {
+      "source": "^/myCustomService/",
+      "destination": "srv-api",
+      "authenticationType": "none",
+      "csrfProtection": false
+    }
+  ],
+  "welcomeFile": "/index.html"
+}

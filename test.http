@@ -1,0 +1,17 @@
+### for file upload 
+PUT http://localhost:4004/myCustomService/mediaFile('')/content HTTP/1.1
+Content-Type: application/pdf
+slug : pythonNotes.pdf
+
+< ./python.pdf
+
+### URL for getting the file uploaded content
+GET http://localhost:4004/myCustomService/mediaFile('5')/content
+
+### Read data from excel
+PUT http://localhost:4004/myCustomService/readDataFromExcel('') HTTP/1.1
+Content-Type:application/octet-stream
+slug : EZLoansFAQ.xlsx
+
+
+< ./EZLoansFAQ.xlsx

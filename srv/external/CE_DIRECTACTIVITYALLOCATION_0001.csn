@@ -1,0 +1,1912 @@
+{
+ "meta": {
+  "creator": "cds-dk 8.1.2"
+ },
+ "$version": "2.0",
+ "definitions": {
+  "CE_DIRECTACTIVITYALLOCATION_0001.SAP__Message": {
+   "kind": "type",
+   "@cds.external": true,
+   "elements": {
+    "code": {
+     "type": "cds.LargeString",
+     "notNull": true
+    },
+    "message": {
+     "type": "cds.LargeString",
+     "notNull": true
+    },
+    "target": {
+     "type": "cds.LargeString"
+    },
+    "additionalTargets": {
+     "items": {
+      "type": "cds.LargeString",
+      "notNull": true
+     }
+    },
+    "transition": {
+     "type": "cds.Boolean",
+     "notNull": true
+    },
+    "numericSeverity": {
+     "type": "cds.Integer",
+     "@odata.Type": "Edm.Byte",
+     "notNull": true
+    },
+    "longtextUrl": {
+     "type": "cds.LargeString"
+    }
+   }
+  },
+  "CE_DIRECTACTIVITYALLOCATION_0001": {
+   "kind": "service",
+   "@cds.external": true,
+   "@CodeList.CurrencyCodes": {
+    "Url": "../../../../default/iwbep/common/0001/$metadata",
+    "CollectionPath": "Currencies"
+   },
+   "@CodeList.UnitsOfMeasure": {
+    "Url": "../../../../default/iwbep/common/0001/$metadata",
+    "CollectionPath": "UnitsOfMeasure"
+   },
+   "@Aggregation.ApplySupported": {
+    "Transformations": [
+     "aggregate",
+     "groupby",
+     "filter"
+    ],
+    "Rollup": {
+     "#": "None"
+    }
+   },
+   "@Common.ApplyMultiUnitBehaviorForSortingAndFiltering": true,
+   "@Capabilities.FilterFunctions": [
+    "eq",
+    "ne",
+    "gt",
+    "ge",
+    "lt",
+    "le",
+    "and",
+    "or",
+    "contains",
+    "startswith",
+    "endswith",
+    "any",
+    "all"
+   ],
+   "@Capabilities.SupportedFormats": [
+    "application/json",
+    "application/pdf"
+   ],
+   "@PDF.Features": {
+    "DocumentDescriptionReference": "../../../../default/iwbep/common/0001/$metadata",
+    "DocumentDescriptionCollection": "MyDocumentDescriptions",
+    "ArchiveFormat": true,
+    "Border": true,
+    "CoverPage": true,
+    "FitToPage": true,
+    "FontName": true,
+    "FontSize": true,
+    "Margin": true,
+    "Padding": true,
+    "Signature": true,
+    "HeaderFooter": true,
+    "ResultSizeDefault": 20000,
+    "ResultSizeMaximum": 20000,
+    "IANATimezoneFormat": true,
+    "Treeview": true
+   },
+   "@Capabilities.KeyAsSegmentSupported": true,
+   "@Capabilities.AsynchronousRequestsSupported": true
+  },
+  "CE_DIRECTACTIVITYALLOCATION_0001.ActivityAllocation": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "FiscalYear": {
+     "key": true,
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Fiscal Year"
+    },
+    "ReferenceDocument": {
+     "key": true,
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Reference Document",
+     "@Common.Heading": "Ref. Doc.",
+     "@Common.QuickInfo": "Reference Doc. Number"
+    },
+    "ControllingArea": {
+     "key": true,
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Immutable": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Controlling Area"
+    },
+    "ReferenceDocumentType": {
+     "key": true,
+     "type": "cds.String",
+     "length": 5,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Reference Document Type"
+    },
+    "ReferenceDocumentContext": {
+     "key": true,
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Reference Document Context"
+    },
+    "ControllingAreaName": {
+     "type": "cds.String",
+     "length": 25,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.Label": "Controlling Area Name"
+    },
+    "AccountingDocumentHeaderText": {
+     "type": "cds.String",
+     "length": 25,
+     "notNull": true,
+     "@Common.Label": "Document Header Text"
+    },
+    "DocumentDate": {
+     "type": "cds.Date",
+     "@Common.FieldControl": {
+      "#": "Mandatory"
+     },
+     "@Common.Label": "Journal Entry Date"
+    },
+    "PostingDate": {
+     "type": "cds.Date",
+     "@Common.FieldControl": {
+      "#": "Mandatory"
+     },
+     "@Common.Label": "Posting Date"
+    },
+    "FiscalPeriod": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Fiscal Period"
+    },
+    "ExchangeRateDate": {
+     "type": "cds.Date",
+     "@Common.Label": "Translation Date",
+     "@Common.QuickInfo": "Date of Translation of Transaction Currency into Local"
+    },
+    "FiscalYearPeriod": {
+     "type": "cds.String",
+     "length": 7,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Fiscal Year Period"
+    },
+    "AccountingDocumentCreationDate": {
+     "type": "cds.Date",
+     "@Core.Computed": true,
+     "@Common.Label": "Entered On",
+     "@Common.QuickInfo": "Accounting Document Entry Date"
+    },
+    "AccountingDocCreatedByUser": {
+     "type": "cds.String",
+     "length": 12,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Created By"
+    },
+    "FullName": {
+     "type": "cds.String",
+     "length": 80,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.Label": "Full Name",
+     "@Common.QuickInfo": "Full Name of Person"
+    },
+    "ControllingDocumentStatus": {
+     "type": "cds.String",
+     "length": 1,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Status",
+     "@Common.Heading": "Document status",
+     "@Common.QuickInfo": "Document status"
+    },
+    "StatusName": {
+     "type": "cds.String",
+     "length": 60,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.Label": "Status",
+     "@Common.QuickInfo": "Document Status"
+    },
+    "AllocationPostingType": {
+     "type": "cds.String",
+     "length": 1,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Posting Type"
+    },
+    "AllocationPostingTypeText": {
+     "type": "cds.String",
+     "length": 60,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.Label": "Posting Type"
+    },
+    "ReferenceDocumentTypeName": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.Label": "Object Type Name",
+     "@Common.QuickInfo": "Name of Object Type"
+    },
+    "PredecessorReferenceDocument": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.Label": "Reposted Reference Document",
+     "@Common.QuickInfo": "Reposted Reference Document",
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Predecessor Reference Document"
+    },
+    "ReversalReferenceDocument": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Reversal Reference Document"
+    },
+    "ReversedReferenceDocument": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Reversed Reference Document"
+    },
+    "GlobalCurrency": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Global Currency"
+    },
+    "TotalAmountInGlobalCurrency": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Common.Label": "Total Amount in Glob. Crcy",
+     "@Common.QuickInfo": "Total Amount in Global Currency",
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "GlobalCurrency"
+     },
+     "@Common.Heading": "Amount in Global Currency"
+    },
+    "AccountingDocumentType": {
+     "type": "cds.String",
+     "length": 2,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Journal Entry Type"
+    },
+    "AccountingDocumentTypeName": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.Label": "Journal Entry Type Name",
+     "@Common.QuickInfo": "Document Type Name"
+    },
+    "ControllingBusTransacType": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "CO Bus. Transaction",
+     "@Common.Heading": "CO Bus. Trans.",
+     "@Common.QuickInfo": "CO Business Transaction"
+    },
+    "SAP__Messages": {
+     "items": {
+      "type": "CE_DIRECTACTIVITYALLOCATION_0001.SAP__Message",
+      "notNull": true
+     }
+    },
+    "_Item": {
+     "type": "cds.Composition",
+     "target": "CE_DIRECTACTIVITYALLOCATION_0001.ActivityAllocationItem",
+     "cardinality": {
+      "max": "*"
+     },
+     "keys": [],
+     "@Common.Composition": true
+    }
+   },
+   "actions": {
+    "Reverse": {
+     "kind": "action",
+     "params": {
+      "_it": {
+       "type": "$self",
+       "notNull": true
+      },
+      "AccountingDocumentHeaderText": {
+       "type": "cds.String",
+       "length": 25,
+       "notNull": true,
+       "@Common.Label": "Document Header Text"
+      },
+      "DocumentDate": {
+       "type": "cds.Date",
+       "@Common.IsUpperCase": true,
+       "@Common.Label": "Journal Entry Date"
+      },
+      "PostingDate": {
+       "type": "cds.Date",
+       "@Common.IsUpperCase": true,
+       "@Common.Label": "Posting Date"
+      }
+     },
+     "returns": {
+      "type": "CE_DIRECTACTIVITYALLOCATION_0001.ActivityAllocation",
+      "notNull": true
+     }
+    }
+   },
+   "@Common.Label": "Direct Activity Allocation Header",
+   "@Common.Messages": {
+    "=": "SAP__Messages"
+   },
+   "@Capabilities.NavigationRestrictions.RestrictedProperties": [
+    {
+     "NavigationProperty": {
+      "=": "_Item"
+     },
+     "InsertRestrictions": {
+      "Insertable": true
+     }
+    }
+   ],
+   "@Capabilities.SearchRestrictions.Searchable": false,
+   "@Capabilities.DeleteRestrictions.Deletable": false,
+   "@Capabilities.UpdateRestrictions.Updatable": false,
+   "@Capabilities.UpdateRestrictions.NonUpdatableNavigationProperties": [
+    "_Item"
+   ],
+   "@Capabilities.UpdateRestrictions.QueryOptions.SelectSupported": true,
+   "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+    {
+     "Property": {
+      "=": "TotalAmountInGlobalCurrency"
+     },
+     "AllowedExpressions": "MultiValue"
+    }
+   ]
+  },
+  "CE_DIRECTACTIVITYALLOCATION_0001.ActivityAllocationItem": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "FiscalYear": {
+     "key": true,
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Fiscal Year"
+    },
+    "ReferenceDocument": {
+     "key": true,
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Reference Document",
+     "@Common.QuickInfo": "Reference Document Number"
+    },
+    "ControllingArea": {
+     "key": true,
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Immutable": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Controlling Area"
+    },
+    "ReferenceDocumentItem": {
+     "key": true,
+     "type": "cds.String",
+     "length": 6,
+     "notNull": true,
+     "@Core.Immutable": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Reference Document Item"
+    },
+    "LedgerGLLineItem": {
+     "key": true,
+     "type": "cds.String",
+     "length": 6,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Journal Entry Item",
+     "@Common.Heading": "General Ledger Journal Entry Line Item",
+     "@Common.QuickInfo": "General Ledger Journal Entry Line Item"
+    },
+    "ReferenceDocumentType": {
+     "key": true,
+     "type": "cds.String",
+     "length": 5,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Reference Document Type"
+    },
+    "ReferenceDocumentContext": {
+     "key": true,
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Reference Document Context"
+    },
+    "AccountingDocument": {
+     "key": true,
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Journal Entry"
+    },
+    "TransactionSubitem": {
+     "type": "cds.String",
+     "length": 6,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Sub Transaction",
+     "@Common.Heading": "SubTA",
+     "@Common.QuickInfo": "Partial Document to be balanced to zero"
+    },
+    "SourceLedger": {
+     "type": "cds.String",
+     "length": 2,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Source Ledger"
+    },
+    "ServicesRenderedDate": {
+     "type": "cds.Date",
+     "@Common.Label": "Serv. Rendered Date",
+     "@Common.Heading": "Serv.R.Dte",
+     "@Common.QuickInfo": "Date on which services are rendered"
+    },
+    "CompanyCode": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Company Code"
+    },
+    "CompanyCodeName": {
+     "type": "cds.String",
+     "length": 25,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.Label": "Company Name",
+     "@Common.QuickInfo": "Name of Company Code or Company"
+    },
+    "SenderCompanyCode": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Sender Company Code"
+    },
+    "SourceCompanyCodeName": {
+     "type": "cds.String",
+     "length": 25,
+     "notNull": true,
+     "@Common.Label": "Sender Company Code Name",
+     "@Common.QuickInfo": "Sender Company Code Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Company Name"
+    },
+    "AccountAssignment": {
+     "type": "cds.String",
+     "length": 30,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Account Assignment"
+    },
+    "AccountAssignmentType": {
+     "type": "cds.String",
+     "length": 2,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Account Assignment Type"
+    },
+    "AccountAssignmentTypeDesc": {
+     "type": "cds.String",
+     "length": 60,
+     "notNull": true,
+     "@Common.Label": "Account Assignment Type Text",
+     "@Common.QuickInfo": "Account Assignment Type Text",
+     "@Core.Computed": true,
+     "@Common.Heading": "Account Assignment Type Description"
+    },
+    "PartnerAccountAssignment": {
+     "type": "cds.String",
+     "length": 30,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Partner Account Assignment"
+    },
+    "PartnerAccountAssignmentType": {
+     "type": "cds.String",
+     "length": 2,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Partner Account Assignment Type"
+    },
+    "PartAccountAssignmentTypeDesc": {
+     "type": "cds.String",
+     "length": 60,
+     "notNull": true,
+     "@Common.Label": "Receiver Account Assignment Type Text",
+     "@Common.QuickInfo": "Receiver Account Assignment Type Text",
+     "@Core.Computed": true,
+     "@Common.Heading": "Account Assignment Type Description"
+    },
+    "GLAccount": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Account for Allocation"
+    },
+    "GLAccountName": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Common.Label": "Account for Allocation Name",
+     "@Common.QuickInfo": "Account for Allocation Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "G/L Account Name"
+    },
+    "ChartOfAccounts": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Chart of Accounts"
+    },
+    "SenderCostCenter": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Sender Cost Center"
+    },
+    "SenderCostCenterName": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Common.Label": "Sender Cost Center Name",
+     "@Common.QuickInfo": "Sender Cost Center Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Cost Center Name"
+    },
+    "CostCtrActivityType": {
+     "type": "cds.String",
+     "length": 6,
+     "notNull": true,
+     "@Common.Label": "Sender Activity Type",
+     "@Common.QuickInfo": "Sender Activity Type",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "ActTyp"
+    },
+    "CostCtrActivityTypeName": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Common.Label": "Sender Activity Type Name",
+     "@Common.QuickInfo": "Sender Activity Type Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Cost Center Activity Type Name"
+    },
+    "Fund": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Sender Fund",
+     "@Common.Heading": "Sender Fnd",
+     "@Common.QuickInfo": "Sender fund"
+    },
+    "FundName": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Common.Label": "Sender Fund Name",
+     "@Common.QuickInfo": "Sender Fund Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Fund Name"
+    },
+    "FunctionalArea": {
+     "type": "cds.String",
+     "length": 16,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Sender Functl Area",
+     "@Common.Heading": "Sender Functional Area",
+     "@Common.QuickInfo": "Sender Functional Area"
+    },
+    "FunctionalAreaName": {
+     "type": "cds.String",
+     "length": 25,
+     "notNull": true,
+     "@Common.Label": "Sender Functional Area Name",
+     "@Common.QuickInfo": "Sender Functional Area Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Functional Area Name"
+    },
+    "GrantID": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Sender Grant"
+    },
+    "GrantName": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Common.Label": "Sender Grant Name",
+     "@Common.QuickInfo": "Sender Grant Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Name"
+    },
+    "BudgetPeriod": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.Label": "Sender Budget Period",
+     "@Common.QuickInfo": "Sender Budget Period",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Budget Period"
+    },
+    "BudgetPeriodName": {
+     "type": "cds.String",
+     "length": 35,
+     "notNull": true,
+     "@Common.Label": "Sender Budget Period Name",
+     "@Common.QuickInfo": "Sender Budget Period Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Budget Period Name"
+    },
+    "SenderCostRecoveryCode": {
+     "type": "cds.String",
+     "length": 2,
+     "notNull": true,
+     "@Common.Label": "Sender Recovery Indicator",
+     "@Common.QuickInfo": "Sender Recovery Indicator",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Sender Cost Recovery Code"
+    },
+    "PartnerCostCenter": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.Label": "Receiver Cost Center",
+     "@Common.QuickInfo": "Receiver Cost Center",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Partner Cost Center"
+    },
+    "PartnerCostCenterName": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Common.Label": "Receiver Cost Center Name",
+     "@Common.QuickInfo": "Receiver Cost Center Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Cost Center Name"
+    },
+    "DocumentItemText": {
+     "type": "cds.String",
+     "length": 50,
+     "notNull": true,
+     "@Common.Label": "Item Text"
+    },
+    "BaseUnit": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsUnit": true,
+     "@Core.Computed": true,
+     "@Common.Label": "Base Unit of Measure",
+     "@Common.Heading": "BUn"
+    },
+    "UnitOfMeasureLongName": {
+     "type": "cds.String",
+     "length": 30,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.Label": "Meas. Unit Text",
+     "@Common.Heading": "Unit of Measurement Text",
+     "@Common.QuickInfo": "Unit of Measurement Text (Maximum 30 Characters)"
+    },
+    "Quantity": {
+     "type": "cds.Decimal",
+     "precision": 15,
+     "scale": 3,
+     "notNull": true,
+     "@Common.Label": "Quantity",
+     "@Common.QuickInfo": "Quantity",
+     "@Measures.Unit": {
+      "=": "BaseUnit"
+     },
+     "@Common.Heading": "Activity Quantity"
+    },
+    "TransactionCurrency": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Transaction Currency"
+    },
+    "AmountInTransactionCurrency": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "TransactionCurrency"
+     },
+     "@Common.Label": "Amount in Transaction Currency"
+    },
+    "PrcTotAmtInTransactionCurrency": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Measures.ISOCurrency": {
+      "=": "TransactionCurrency"
+     },
+     "@Common.Label": "Total Cost Rate in Trans. Crcy",
+     "@Common.Heading": "Total Cost Rate in Transaction Currency",
+     "@Common.QuickInfo": "Price per Unit of Measure in Transaction Currency"
+    },
+    "CompanyCodeCurrency": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Company Code Currency"
+    },
+    "AmountInCompanyCodeCurrency": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "CompanyCodeCurrency"
+     },
+     "@Common.Label": "Amount in Company Code Currency"
+    },
+    "PrcTotAmtInCompanyCodeCurrency": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "CompanyCodeCurrency"
+     },
+     "@Common.Label": "Total Cost Rate in CC Crcy",
+     "@Common.Heading": "Total Cost Rate in Company Code Currency",
+     "@Common.QuickInfo": "Price per Unit of Meassure in Company Code Currency"
+    },
+    "GlobalCurrency": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Global Currency"
+    },
+    "AmountInGlobalCurrency": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "GlobalCurrency"
+     },
+     "@Common.Label": "Amount in Global Currency"
+    },
+    "PrcTotAmtInGlobalCurrency": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "GlobalCurrency"
+     },
+     "@Common.Label": "Total Cost Rate in Global Crcy",
+     "@Common.Heading": "Total Cost Rate in Global Currency",
+     "@Common.QuickInfo": "Price per Unit of Meassure in Global Currency"
+    },
+    "PartnerWBSElementExternalID": {
+     "type": "cds.String",
+     "length": 24,
+     "notNull": true,
+     "@Common.Label": "Receiver WBS Element",
+     "@Common.QuickInfo": "Receiver WBS Element",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Partner WBS Element (external ID)"
+    },
+    "WBSDescription": {
+     "type": "cds.String",
+     "length": 40,
+     "notNull": true,
+     "@Common.Label": "Receiver WBS Element Name",
+     "@Common.QuickInfo": "Receiver WBS Element Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "WBS Element Name"
+    },
+    "PartnerProjectExternalID": {
+     "type": "cds.String",
+     "length": 24,
+     "notNull": true,
+     "@Common.Label": "Receiver Project",
+     "@Common.QuickInfo": "Receiver Project",
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Partner Project External ID"
+    },
+    "PartnerServiceDocumentType": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Common.Label": "Receiver Service Doc. Type",
+     "@Common.QuickInfo": "Receiver Service Document Type",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Partner Service Document Type"
+    },
+    "PartnerServiceDocument": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.Label": "Receiver Service Document",
+     "@Common.QuickInfo": "Receiver Service Document",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Partner Service Document"
+    },
+    "PartnerServiceDocumentItem": {
+     "type": "cds.String",
+     "length": 6,
+     "notNull": true,
+     "@Common.Label": "Receiver Service Doc. Item",
+     "@Common.QuickInfo": "Receiver Service Document Item",
+     "@Common.IsDigitSequence": true,
+     "@Common.Heading": "Partner Service Document Item"
+    },
+    "PartnerProjectNetwork": {
+     "type": "cds.String",
+     "length": 12,
+     "notNull": true,
+     "@Common.Label": "Receiver Project Network",
+     "@Common.QuickInfo": "Receiver Project Network",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Partner Project Network"
+    },
+    "PartnerOrder": {
+     "type": "cds.String",
+     "length": 12,
+     "notNull": true,
+     "@Common.Label": "Receiver Order",
+     "@Common.QuickInfo": "Receiver Order",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Partner Order"
+    },
+    "PartnerProjectNetworkActivity": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Common.Label": "Receiver Project Network Activity",
+     "@Common.QuickInfo": "Receiver Project Network Activity",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Partner Project Network Activity"
+    },
+    "PartnerCostCtrActivityType": {
+     "type": "cds.String",
+     "length": 6,
+     "notNull": true,
+     "@Common.Label": "Receiver Activity Type",
+     "@Common.QuickInfo": "Receiver Activity Type",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Partner Cost Center Activity Type"
+    },
+    "PartnerCostCtrActivityTypeName": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Common.Label": "Receiver Activity Type Name",
+     "@Common.QuickInfo": "Receiver Activity Type Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Cost Center Activity Type Name"
+    },
+    "PartnerCostObject": {
+     "type": "cds.String",
+     "length": 12,
+     "notNull": true,
+     "@Common.Label": "Receiver Cost Object",
+     "@Common.QuickInfo": "Receiver Cost Object",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Partner Cost Object"
+    },
+    "PartnerSalesDocument": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.Label": "Receiver Sales Document",
+     "@Common.QuickInfo": "Receiver Sales Document",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Partner Sales Document"
+    },
+    "PartnerSalesDocumentItem": {
+     "type": "cds.String",
+     "length": 6,
+     "notNull": true,
+     "@Common.Label": "Receiver Sales Doc. Item",
+     "@Common.QuickInfo": "Receiver Sales Document Item",
+     "@Common.IsDigitSequence": true,
+     "@Common.Heading": "Partner Sales Document Item"
+    },
+    "WorkItem": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Work Item ID"
+    },
+    "PersonnelNumber": {
+     "type": "cds.String",
+     "length": 8,
+     "notNull": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Personnel Number",
+     "@Common.Heading": "Pers.No."
+    },
+    "Plant": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Plant",
+     "@Common.Heading": "Plnt"
+    },
+    "Product": {
+     "type": "cds.String",
+     "length": 18,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Product",
+     "@Common.QuickInfo": "Product Number"
+    },
+    "ReceiverProcurementProcess": {
+     "type": "cds.String",
+     "length": 12,
+     "notNull": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Prod. Proc. No.",
+     "@Common.Heading": "Prod.Proc",
+     "@Common.QuickInfo": "Production Process"
+    },
+    "PartnerBusinessProcess": {
+     "type": "cds.String",
+     "length": 12,
+     "notNull": true,
+     "@Common.Label": "Receiver Business Process",
+     "@Common.QuickInfo": "Receiver Business Process",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Partner Business Process"
+    },
+    "PartnerFund": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Receiver Fund"
+    },
+    "ReceiverPostedFundName": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Common.Label": "Receiver Fund Name",
+     "@Common.QuickInfo": "Receiver Fund Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Fund Name"
+    },
+    "PartnerFunctionalArea": {
+     "type": "cds.String",
+     "length": 16,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Rec. Functional Area",
+     "@Common.Heading": "Receiver Functional Area",
+     "@Common.QuickInfo": "Receiver Functional Area"
+    },
+    "PartnerFunctionalAreaName": {
+     "type": "cds.String",
+     "length": 25,
+     "notNull": true,
+     "@Common.Label": "Receiver Functional Area Name",
+     "@Common.QuickInfo": "Receiver Functional Area Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Functional Area Name"
+    },
+    "PartnerGrant": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Receiver Grant"
+    },
+    "ReceiverPostedGrantName": {
+     "type": "cds.String",
+     "length": 20,
+     "notNull": true,
+     "@Common.Label": "Receiver Grant Name",
+     "@Common.QuickInfo": "Receiver Grant Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Name"
+    },
+    "PartnerBudgetPeriod": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.Label": "Receiver Budget Period",
+     "@Common.QuickInfo": "Receiver Budget Period",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "P.Bud.Per."
+    },
+    "ReceiverPostedBudgetPeriodName": {
+     "type": "cds.String",
+     "length": 35,
+     "notNull": true,
+     "@Common.Label": "Receiver Budget Period Name",
+     "@Common.QuickInfo": "Receiver Budget Period Name",
+     "@Core.Computed": true,
+     "@Common.Heading": "Budget Period Name"
+    },
+    "IsSettled": {
+     "type": "cds.Boolean",
+     "notNull": true,
+     "@Common.Label": "Is Reposted",
+     "@Common.QuickInfo": "Is Reposted",
+     "@Core.Computed": true,
+     "@Common.Heading": "Settld"
+    },
+    "BillableControl": {
+     "type": "cds.String",
+     "length": 2,
+     "notNull": true,
+     "@Common.Label": "Receiver Accounting Indicator",
+     "@Common.QuickInfo": "Receiver Accounting Indicator",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "BCon"
+    },
+    "BillableControlName": {
+     "type": "cds.String",
+     "length": 25,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.Label": "BillableControl Name",
+     "@Common.Heading": "Billable Control Name",
+     "@Common.QuickInfo": "Billable Control Name"
+    },
+    "PartnerCostRecoveryCode": {
+     "type": "cds.String",
+     "length": 2,
+     "notNull": true,
+     "@Common.Label": "Receiver Recovery Indicator",
+     "@Common.QuickInfo": "Receiver Recovery Indicator",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Joint Venture Cost Recovery Code"
+    },
+    "ControllingDocumentItem": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Controlling Doc Item",
+     "@Common.Heading": "Controlling Document Item",
+     "@Common.QuickInfo": "Controlling Document Item"
+    },
+    "OperatingConcern": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Operating Concern",
+     "@Common.Heading": "OpCo"
+    },
+    "PartnerProfitabilitySegment": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Profitab. Segmt No.",
+     "@Common.Heading": "Prof. Seg.",
+     "@Common.QuickInfo": "Profitability Segment Number (CO-PA)"
+    },
+    "PartProfitabilitySgmtIsAssgd": {
+     "type": "cds.Boolean",
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.Label": "Profitability Segment Is Assigned",
+     "@Common.QuickInfo": "Is Profitability Segment Assigned?"
+    },
+    "SuccessorReferenceDocument": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.Label": "Reposting Reference Document",
+     "@Common.QuickInfo": "Reposting Reference Document",
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Reference Document"
+    },
+    "OrderOperation": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Common.Label": "Receiver Order Operation",
+     "@Common.QuickInfo": "Receiver Order Operation",
+     "@Common.IsUpperCase": true
+    },
+    "ReceiverRECompanyCode": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Common.Label": "Receiver Real Estate Company Code",
+     "@Common.QuickInfo": "Receiver Real Estate Company Code",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "PaCC"
+    },
+    "REPartnerBusinessEntity": {
+     "type": "cds.String",
+     "length": 8,
+     "notNull": true,
+     "@Common.Label": "Receiver Real Estate Business Entity",
+     "@Common.QuickInfo": "Receiver Real Estate Business Entity",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "RE Partner Business Entity"
+    },
+    "RealEstatePartnerBuilding": {
+     "type": "cds.String",
+     "length": 8,
+     "notNull": true,
+     "@Common.Label": "Receiver Real Estate Building",
+     "@Common.QuickInfo": "Receiver Real Estate Building",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Real Estate Partner Building"
+    },
+    "RealEstatePartnerProperty": {
+     "type": "cds.String",
+     "length": 8,
+     "notNull": true,
+     "@Common.Label": "Receiver Real Estate Property",
+     "@Common.QuickInfo": "Receiver Real Estate Property",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Real Estate Partner Property"
+    },
+    "REPartnerRentalObject": {
+     "type": "cds.String",
+     "length": 8,
+     "notNull": true,
+     "@Common.Label": "Receiver Real Estate Rental Object",
+     "@Common.QuickInfo": "Receiver Real Estate Rental Object",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "RE Partner Rental Object"
+    },
+    "RealEstatePartnerContract": {
+     "type": "cds.String",
+     "length": 13,
+     "notNull": true,
+     "@Common.Label": "Receiver Real Estate Contract",
+     "@Common.QuickInfo": "Receiver Real Estate Contract",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "Real Estate Partner Contract"
+    },
+    "REPartnerServiceChargeKey": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Common.Label": "Receiver Real Estate Service Charge Key",
+     "@Common.QuickInfo": "Receiver Real Estate Service Charge Key",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "RE Partner Service Charge Key"
+    },
+    "REPartnerSettlementUnitID": {
+     "type": "cds.String",
+     "length": 5,
+     "notNull": true,
+     "@Common.Label": "Receiver Real Estate Settlement Unit",
+     "@Common.QuickInfo": "Receiver Real Estate Settlement Unit",
+     "@Common.IsUpperCase": true,
+     "@Common.Heading": "RE Partner Settlement Unit"
+    },
+    "PartnerSettlementReferenceDate": {
+     "type": "cds.Date",
+     "@Common.Label": "Receiver Real Estate Settlement Reference Date",
+     "@Common.QuickInfo": "Receiver Real Estate Settlement Reference Date",
+     "@Common.Heading": "P. RefDate"
+    },
+    "PartnerProfitCenter": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Partner Profit Center"
+    },
+    "ProfitCenter": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Profit Center"
+    },
+    "FreeDefinedCurrency1": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Freely Defined Currency 1"
+    },
+    "AmountInFreeDefinedCurrency1": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "FreeDefinedCurrency1"
+     },
+     "@Common.Label": "Amount in Freely Defined Currency 1"
+    },
+    "FreeDefinedCurrency2": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Freely Defined Currency 2"
+    },
+    "AmountInFreeDefinedCurrency2": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "FreeDefinedCurrency2"
+     },
+     "@Common.Label": "Amount in Freely Defined Currency 2"
+    },
+    "FreeDefinedCurrency3": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Freely Defined Currency 3"
+    },
+    "AmountInFreeDefinedCurrency3": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "FreeDefinedCurrency3"
+     },
+     "@Common.Label": "Amount in Freely Defined Currency 3"
+    },
+    "FreeDefinedCurrency4": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Freely Defined Currency 4"
+    },
+    "AmountInFreeDefinedCurrency4": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "FreeDefinedCurrency4"
+     },
+     "@Common.Label": "Amount in Freely Defined Currency 4"
+    },
+    "FreeDefinedCurrency5": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Freely Defined Currency 5"
+    },
+    "AmountInFreeDefinedCurrency5": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "FreeDefinedCurrency5"
+     },
+     "@Common.Label": "Amount in Freely Defined Currency 5"
+    },
+    "FreeDefinedCurrency6": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Freely Defined Currency 6"
+    },
+    "AmountInFreeDefinedCurrency6": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "FreeDefinedCurrency6"
+     },
+     "@Common.Label": "Amount in Freely Defined Currency 6"
+    },
+    "FreeDefinedCurrency7": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Freely Defined Currency 7"
+    },
+    "AmountInFreeDefinedCurrency7": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "FreeDefinedCurrency7"
+     },
+     "@Common.Label": "Amount in Freely Defined Currency 7"
+    },
+    "FreeDefinedCurrency8": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Freely Defined Currency 8"
+    },
+    "AmountInFreeDefinedCurrency8": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "FreeDefinedCurrency8"
+     },
+     "@Common.Label": "Amount in Freely Defined Currency 8"
+    },
+    "FunctionalCurrency": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsCurrency": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Functional Currency",
+     "@Common.Heading": "FuCrcy"
+    },
+    "AmountInFunctionalCurrency": {
+     "type": "cds.Decimal",
+     "precision": 23,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Measures.ISOCurrency": {
+      "=": "FunctionalCurrency"
+     },
+     "@Common.Label": "Amount in Functional Currency"
+    },
+    "ControllingBusTransacType": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Business Transaction",
+     "@Common.Heading": "BTran",
+     "@Common.QuickInfo": "CO Business Transaction"
+    },
+    "_Header": {
+     "type": "cds.Association",
+     "target": "CE_DIRECTACTIVITYALLOCATION_0001.ActivityAllocation",
+     "cardinality": {
+      "max": 1
+     },
+     "keys": []
+    },
+    "_ProfitabilitySegment": {
+     "type": "cds.Composition",
+     "target": "CE_DIRECTACTIVITYALLOCATION_0001.ProfitabilitySegment",
+     "cardinality": {
+      "max": 1
+     },
+     "keys": [],
+     "@Common.Composition": true
+    }
+   },
+   "@Common.Label": "Direct Activity Allocation Item",
+   "@Capabilities.NavigationRestrictions.RestrictedProperties": [
+    {
+     "NavigationProperty": {
+      "=": "_ProfitabilitySegment"
+     },
+     "InsertRestrictions": {
+      "Insertable": true
+     }
+    }
+   ],
+   "@Capabilities.SearchRestrictions.Searchable": false,
+   "@Capabilities.InsertRestrictions.Insertable": false,
+   "@Capabilities.DeleteRestrictions.Deletable": false,
+   "@Capabilities.UpdateRestrictions.Updatable": false,
+   "@Capabilities.UpdateRestrictions.NonUpdatableNavigationProperties": [
+    "_Header",
+    "_ProfitabilitySegment"
+   ],
+   "@Capabilities.UpdateRestrictions.QueryOptions.SelectSupported": true,
+   "@Capabilities.FilterRestrictions.FilterExpressionRestrictions": [
+    {
+     "Property": {
+      "=": "Quantity"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "AmountInTransactionCurrency"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "PrcTotAmtInTransactionCurrency"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "AmountInCompanyCodeCurrency"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "PrcTotAmtInCompanyCodeCurrency"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "AmountInGlobalCurrency"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "PrcTotAmtInGlobalCurrency"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "AmountInFreeDefinedCurrency1"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "AmountInFreeDefinedCurrency2"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "AmountInFreeDefinedCurrency3"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "AmountInFreeDefinedCurrency4"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "AmountInFreeDefinedCurrency5"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "AmountInFreeDefinedCurrency6"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "AmountInFreeDefinedCurrency7"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "AmountInFreeDefinedCurrency8"
+     },
+     "AllowedExpressions": "MultiValue"
+    },
+    {
+     "Property": {
+      "=": "AmountInFunctionalCurrency"
+     },
+     "AllowedExpressions": "MultiValue"
+    }
+   ]
+  },
+  "CE_DIRECTACTIVITYALLOCATION_0001.ProfitabilitySegment": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "FiscalYear": {
+     "key": true,
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Fiscal Year"
+    },
+    "ReferenceDocument": {
+     "key": true,
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Reference Document",
+     "@Common.QuickInfo": "Reference Document Number"
+    },
+    "ControllingArea": {
+     "key": true,
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Controlling Area"
+    },
+    "ReferenceDocumentItem": {
+     "key": true,
+     "type": "cds.String",
+     "length": 6,
+     "notNull": true,
+     "@Core.Immutable": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Reference Document Item"
+    },
+    "LedgerGLLineItem": {
+     "key": true,
+     "type": "cds.String",
+     "length": 6,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Journal Entry Item",
+     "@Common.Heading": "General Ledger Journal Entry Line Item",
+     "@Common.QuickInfo": "General Ledger Journal Entry Line Item"
+    },
+    "ReferenceDocumentType": {
+     "key": true,
+     "type": "cds.String",
+     "length": 5,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Reference Document Type"
+    },
+    "ReferenceDocumentContext": {
+     "key": true,
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Reference Document Context"
+    },
+    "AccountingDocument": {
+     "key": true,
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Journal Entry"
+    },
+    "CompanyCode": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Common.FieldControl": {
+      "#": "Mandatory"
+     },
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Company Code"
+    },
+    "TransactionSubitem": {
+     "type": "cds.String",
+     "length": 6,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Sub Transaction",
+     "@Common.Heading": "SubTA",
+     "@Common.QuickInfo": "Partial Document to be balanced to zero"
+    },
+    "SourceLedger": {
+     "type": "cds.String",
+     "length": 2,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Source Ledger"
+    },
+    "Customer": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Customer",
+     "@Common.QuickInfo": "Customer Number"
+    },
+    "CustomerGroup": {
+     "type": "cds.String",
+     "length": 2,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Customer Group",
+     "@Common.Heading": "CGrp"
+    },
+    "CustomerSupplierIndustry": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Customer Supplier Industry"
+    },
+    "CustomerSupplierCountry": {
+     "type": "cds.String",
+     "length": 3,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Customer or Supplier Country/Region"
+    },
+    "SalesDistrict": {
+     "type": "cds.String",
+     "length": 6,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Sales District",
+     "@Common.Heading": "SDst"
+    },
+    "SoldProduct": {
+     "type": "cds.String",
+     "length": 18,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Product Sold"
+    },
+    "SoldProductGroup": {
+     "type": "cds.String",
+     "length": 9,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Product Sold Group",
+     "@Common.Heading": "ProdSoldGp"
+    },
+    "SalesOrganization": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Sales Organization",
+     "@Common.Heading": "SOrg."
+    },
+    "DistributionChannel": {
+     "type": "cds.String",
+     "length": 2,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Distribution Channel",
+     "@Common.Heading": "DChl"
+    },
+    "OrganizationDivision": {
+     "type": "cds.String",
+     "length": 2,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Division",
+     "@Common.Heading": "Dv"
+    },
+    "BillToParty": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Bill-to Party",
+     "@Common.Heading": "Bill-to"
+    },
+    "ShipToParty": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Ship-to Party",
+     "@Common.Heading": "Ship-to"
+    },
+    "WBSElementExternalID": {
+     "type": "cds.String",
+     "length": 24,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "WBS Element External ID"
+    },
+    "ServiceDocumentType": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Service Doc. Type",
+     "@Common.Heading": "Service Document Type",
+     "@Common.QuickInfo": "Service Document Type"
+    },
+    "ServiceDocument": {
+     "type": "cds.String",
+     "length": 10,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Service Document",
+     "@Common.QuickInfo": "Service Document ID"
+    },
+    "ServiceDocumentItem": {
+     "type": "cds.String",
+     "length": 6,
+     "notNull": true,
+     "@Common.IsDigitSequence": true,
+     "@Common.Label": "Service Doc. Item",
+     "@Common.Heading": "Service Document Item",
+     "@Common.QuickInfo": "Service Document Item ID"
+    },
+    "FunctionalArea": {
+     "type": "cds.String",
+     "length": 16,
+     "notNull": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Functional Area",
+     "@Common.Heading": "FA"
+    },
+    "ControllingBusTransacType": {
+     "type": "cds.String",
+     "length": 4,
+     "notNull": true,
+     "@Core.Computed": true,
+     "@Common.IsUpperCase": true,
+     "@Common.Label": "Business Transaction",
+     "@Common.Heading": "BTran",
+     "@Common.QuickInfo": "CO Business Transaction"
+    },
+    "_ActyAllocation": {
+     "type": "cds.Association",
+     "target": "CE_DIRECTACTIVITYALLOCATION_0001.ActivityAllocation",
+     "cardinality": {
+      "max": 1
+     },
+     "keys": []
+    },
+    "_Item": {
+     "type": "cds.Association",
+     "target": "CE_DIRECTACTIVITYALLOCATION_0001.ActivityAllocationItem",
+     "cardinality": {
+      "max": 1
+     },
+     "keys": []
+    }
+   },
+   "@Common.Label": "Allocation Receiver Profitability Segment",
+   "@Capabilities.SearchRestrictions.Searchable": false,
+   "@Capabilities.InsertRestrictions.Insertable": false,
+   "@Capabilities.DeleteRestrictions.Deletable": false,
+   "@Capabilities.UpdateRestrictions.Updatable": false,
+   "@Capabilities.UpdateRestrictions.NonUpdatableNavigationProperties": [
+    "_ActyAllocation",
+    "_Item"
+   ],
+   "@Capabilities.UpdateRestrictions.QueryOptions.SelectSupported": true
+  }
+ }
+}
