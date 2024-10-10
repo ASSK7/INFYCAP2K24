@@ -6,7 +6,15 @@
       "destination": "srv-api",
       "authenticationType": "none",
       "csrfProtection": false
-    }
+    },
+    {
+      "source": "^/(.*)$",
+      "target": "$1",
+      "authenticationType": "xsuaa",
+      "destination": "srv_api",           
+      "csrfProtection": false
+      
+  }
   ],
   "welcomeFile": "/index.html"
 }

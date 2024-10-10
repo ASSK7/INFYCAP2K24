@@ -2,25 +2,62 @@
   "xsappname": "apihubcap",
   "tenant-mode": "dedicated",
   "description": "Security profile of called application",
-  "scopes": [{
-    "name": "uaa.user",
-    "description": "UAA"
-  }],
-  "role-templates": [{
-    "name": "Token_Exchange",
-    "description": "UAA",
-    "scope-references": [
-      "uaa.user"
-    ]
-  }],
+  "scopes": [
+    {
+      "name": "uaa.user",
+      "description": "UAA"
+    },
+    {
+      "name": "$XSAPPNAME.INFY_READ",
+      "description": "for reading the data"
+    },
+    {
+      "name": "$XSAPPNAME.INFY_ADMIN",
+      "description": "Able to maintain the data"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "location",
+      "description": "Specifies location",
+      "valueType": "string"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Token_Exchange",
+      "description": "UAA",
+      "scope-references": [
+        "uaa.user"
+      ]
+    },
+    {
+      "name": "INFY_READ",
+      "description": "for reading the data",
+      "scope-references": [
+        "$XSAPPNAME.INFY_READ"
+      ],
+      "attribute-references": [
+        
+      ]
+    },
+    {
+      "name": "INFY_ADMIN",
+      "description": "Full access",
+      "scope-references": [
+        "$XSAPPNAME.INFY_ADMIN"
+      ]
+    }
+  ],
   "oauth2-configuration": {
-    "token-validity": 43200, 
+    "token-validity": 43200,
     "redirect-uris": [
       "https://myapp.cfapps.eu10-004.hana.ondemand.com",
       "https://*27b52a45trial-dev-apihubcap-approuter.cfapps.us10-001.hana.ondemand.com*",
-         "https://*27b52a45trial.authentication.us10.hana.ondemand.com*",
-        "https://27b52a45trial.authentication.us10.hana.ondemand.com/oauth/authorize?response_type=code&client_id=sb-apihubcap!t340698&redirect_uri=https://27b52a45trial-dev-apihubcap-approuter.cfapps.us10-001.hana.ondemand.com/login/callback",
-        "https://*.cfapps.us10-001.hana.ondemand.com/login/callback*"],
+      "https://*27b52a45trial.authentication.us10.hana.ondemand.com*",
+      "https://27b52a45trial.authentication.us10.hana.ondemand.com/oauth/authorize?response_type=code&client_id=sb-apihubcap!t340698&redirect_uri=https://27b52a45trial-dev-apihubcap-approuter.cfapps.us10-001.hana.ondemand.com/login/callback",
+      "https://*.cfapps.us10-001.hana.ondemand.com/login/callback*"
+    ],
     "refresh-token-validity": 1800
-    }
+  }
 }

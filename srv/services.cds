@@ -6,6 +6,13 @@ using { myproj } from '../db/apihub';
 service MyService @(path : '/myCustomService'){
 
     // entity ActivityAllocation as projection on mySrv.ActivityAllocation;  //through APIHUB api
+    @restrict : [
+        {
+            grant : '*',
+            to : 'INFY_READ',
+            where : 'location = ''Hyderabad'''
+        }
+    ]
     entity empDetails as projection on empDtls; //through db table
     entity mediaFile as projection on myproj.mediaFile; //for file upload into db table directly
 

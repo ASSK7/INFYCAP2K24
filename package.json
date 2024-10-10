@@ -34,8 +34,9 @@
         "kind": "hana"
       },
       "uaa": {
-        "kind": "+"
+        "kind": "xsuaa"
       },
+      "auth" : "xsuaa",
       "schema_evolution": "auto",
       "CE_DIRECTACTIVITYALLOCATION_0001": {
         "kind": "odata-v4",
